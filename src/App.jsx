@@ -1,17 +1,18 @@
 import { CORE_CONCEPTS } from "./data.js";
+import { EXAMPLES } from "./data.js";
 import Header from "./components/header.jsx";
 import CoreConcept from "./components/core-components.jsx";
 import TabButton from "./components/tab-button.jsx";
 
 import { useState } from "react";
 
-let tabContent = "Press a button";
+let tabContent = "components";
 
 function App() {
-  const [tabContent, setTabContent] = useState("Press a button");
+  const [tabContent, setTabContent] = useState("components");
 
   function clickHandler(buttonName) {
-    setTabContent(`You clicked the ${buttonName} button!`);
+    setTabContent(buttonName);
     console.log(`Button clicked: ${buttonName}`);
   }
   return (
@@ -32,34 +33,40 @@ function App() {
           <menu>
             <TabButton
               onClick={() => {
-                clickHandler("Components");
+                clickHandler("components");
               }}
             >
               Components
             </TabButton>
             <TabButton
               onClick={() => {
-                clickHandler("JSX");
+                clickHandler("jsx");
               }}
             >
               JSX
             </TabButton>
             <TabButton
               onClick={() => {
-                clickHandler("Props");
+                clickHandler("props");
               }}
             >
               Props
             </TabButton>
             <TabButton
               onClick={() => {
-                clickHandler("State");
+                clickHandler("state");
               }}
             >
               State
             </TabButton>
           </menu>
-          {tabContent}
+          <div id="tab-content">
+            <h3>{EXAMPLES[tabContent].title}</h3>
+            <p>{EXAMPLES[tabContent].description}</p>
+            <pre>
+              <code>{EXAMPLES[tabContent].code}</code>
+            </pre>
+          </div>
         </section>
       </main>
     </div>
