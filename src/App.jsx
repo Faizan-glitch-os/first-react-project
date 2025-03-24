@@ -1,44 +1,31 @@
-import reactImage from "./assets/react-core-concepts.png";
 import { CORE_CONCEPTS } from "./data.js";
-
-function HeaderComponent() {
-  return (
-    <header>
-      <img src={reactImage} alt="Stylized atom" />
-      <h1>React Essentials</h1>
-      <p>
-        Fundamental React concepts you will need for almost any app you are
-        going to build!
-      </p>
-    </header>
-  );
-}
-
-function CoreConceptComponent({ image, title, description }) {
-  return (
-    <li>
-      <img src={image} alt={title} />
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </li>
-  );
-}
+import Header from "./components/header.jsx";
+import CoreConcept from "./components/core-components.jsx";
+import TabButton from "./components/tab-button.jsx";
 
 function App() {
   return (
     <div>
-      <HeaderComponent />
+      <Header />
       <main>
         <section id="core-concepts">
           <h2>Core Concepts</h2>
           <ul>
-            <CoreConceptComponent {...CORE_CONCEPTS[0]} />
-            <CoreConceptComponent {...CORE_CONCEPTS[1]} />
-            <CoreConceptComponent {...CORE_CONCEPTS[2]} />
-            <CoreConceptComponent {...CORE_CONCEPTS[3]} />
+            {CORE_CONCEPTS.map((item, index) => (
+              <CoreConcept {...CORE_CONCEPTS[index]} />
+            ))}
           </ul>
         </section>
         <h2>Time to get started!</h2>
+        <section id="examples">
+          <h2>Examples</h2>
+          <menu>
+            <TabButton>Components</TabButton>
+            <TabButton>JSX</TabButton>
+            <TabButton>Props</TabButton>
+            <TabButton>State</TabButton>
+          </menu>
+        </section>
       </main>
     </div>
   );
