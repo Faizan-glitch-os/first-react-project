@@ -6,10 +6,10 @@ import TabButton from "./components/tab-button.jsx";
 
 import { useState } from "react";
 
-let tabContent = "components";
+let tabContent = null;
 
 function App() {
-  const [tabContent, setTabContent] = useState("components");
+  const [tabContent, setTabContent] = useState(null);
 
   function clickHandler(buttonName) {
     setTabContent(buttonName);
@@ -32,6 +32,7 @@ function App() {
           <h2>Examples</h2>
           <menu>
             <TabButton
+              isSelected={tabContent === "components" ? true : false}
               onClick={() => {
                 clickHandler("components");
               }}
@@ -39,6 +40,7 @@ function App() {
               Components
             </TabButton>
             <TabButton
+              isSelected={tabContent === "jsx" ? true : false}
               onClick={() => {
                 clickHandler("jsx");
               }}
@@ -46,6 +48,7 @@ function App() {
               JSX
             </TabButton>
             <TabButton
+              isSelected={tabContent === "props" ? true : false}
               onClick={() => {
                 clickHandler("props");
               }}
@@ -53,6 +56,7 @@ function App() {
               Props
             </TabButton>
             <TabButton
+              isSelected={tabContent === "state" ? true : false}
               onClick={() => {
                 clickHandler("state");
               }}
@@ -60,13 +64,17 @@ function App() {
               State
             </TabButton>
           </menu>
-          <div id="tab-content">
-            <h3>{EXAMPLES[tabContent].title}</h3>
-            <p>{EXAMPLES[tabContent].description}</p>
-            <pre>
-              <code>{EXAMPLES[tabContent].code}</code>
-            </pre>
-          </div>
+          {tabContent == null ? (
+            <p>Please select a topic</p>
+          ) : (
+            <div id="tab-content">
+              <h3>{EXAMPLES[tabContent].title}</h3>
+              <p>{EXAMPLES[tabContent].description}</p>
+              <pre>
+                <code>{EXAMPLES[tabContent].code}</code>
+              </pre>
+            </div>
+          )}
         </section>
       </main>
     </div>
